@@ -1,0 +1,304 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+// Layer definitions
+#define MAC_DEF 0
+#define LIN_DEF 1
+#define WIN_DEF 2
+#define SYM 3
+#define MAC_NAV 4
+#define LIN_NAV 5
+#define WIN_NAV 6
+#define NUM 7
+#define FUN 8
+#define MOD 9
+#define KEB 10
+
+/ {
+    behaviors {
+        // Mod-tap for Ctrl/Esc
+        mt_esc: mod_tap_esc {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <0>;
+            flavor = "hold-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        
+        combo_q {
+            timeout-ms = <40>;
+            key-positions = <2 3>;  // W + E
+            bindings = <&kp Q>;
+            layers = <MAC_DEF LIN_DEF WIN_DEF>;
+        };
+        
+        combo_p {
+            timeout-ms = <40>;
+            key-positions = <8 9>;  // I + O
+            bindings = <&kp P>;
+            layers = <MAC_DEF LIN_DEF WIN_DEF>;
+        };
+    };
+
+    macros {
+        // ============ MAC SHORTCUTS ============
+        mac_copy: mac_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(C)>;
+        };
+        mac_paste: mac_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(V)>;
+        };
+        mac_undo: mac_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(Z)>;
+        };
+        mac_app: mac_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(SPACE)>;
+        };
+        mac_emo: mac_emo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LC(SPACE))>;
+        };
+        mac_win: mac_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(TAB)>;
+        };
+        mac_lang: mac_lang {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LA(SPACE))>;
+        };
+
+        // ============ LINUX SHORTCUTS ============
+        lin_copy: lin_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C)>;
+        };
+        lin_paste: lin_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V)>;
+        };
+        lin_undo: lin_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Z)>;
+        };
+        lin_app: lin_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(D)>;
+        };
+        lin_emo: lin_emo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LA(E))>;
+        };
+        lin_win: lin_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(TAB)>;
+        };
+        lin_lang: lin_lang {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(SPACE)>;
+        };
+
+        // ============ WINDOWS SHORTCUTS ============
+        win_copy: win_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C)>;
+        };
+        win_paste: win_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V)>;
+        };
+        win_undo: win_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Z)>;
+        };
+        win_app: win_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(R)>;
+        };
+        win_emo: win_emo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(DOT)>;
+        };
+        win_win: win_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(TAB)>;
+        };
+        win_lang: win_lang {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LSHFT)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // ============ MAC BASE LAYER (0) ============
+        mac_default {
+            bindings = <
+   &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
+   &mt_esc LCTRL ESC &kp A  &kp S  &kp D     &kp F      &kp G        &kp H    &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL       &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N    &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+                                 &kp LGUI  &mo MAC_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
+            >;
+        };
+
+        // ============ LINUX BASE LAYER (1) ============
+        linux_default {
+            bindings = <
+   &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
+   &mt_esc LCTRL ESC &kp A  &kp S  &kp D     &kp F      &kp G        &kp H    &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL       &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N    &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+                                 &kp LGUI  &mo LIN_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
+            >;
+        };
+
+        // ============ WINDOWS BASE LAYER (2) ============
+        windows_default {
+            bindings = <
+   &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
+   &mt_esc LCTRL ESC &kp A  &kp S  &kp D     &kp F      &kp G        &kp H    &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL       &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N    &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+                                 &kp LGUI  &mo WIN_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
+            >;
+        };
+
+        // ============ SHARED SYM LAYER (3) ============
+        sym_layer {
+            bindings = <
+   &trans  &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET &kp AMPS  &kp EQUAL &kp TILDE &kp GRAVE &trans
+   &trans  &kp PLUS  &kp MINUS &kp LBKT  &kp LPAR  &kp LBRC     &kp BSLH  &sk LCTRL &sk LSHFT &sk LGUI  &sk LALT  &trans
+   &trans  &kp STAR  &kp UNDER &kp RBKT  &kp RPAR  &kp RBRC     &kp FSLH  &kp PIPE  &kp LT    &kp GT    &kp QMARK &trans
+                               &trans    &trans    &mo FUN      &trans    &trans    &trans
+            >;
+        };
+
+        // ============ MAC NAV LAYER (4) ============
+        mac_nav {
+            bindings = <
+   &bootloader &mac_lang &mac_win  &mac_app  &mac_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp LG(LEFT) &kp LG(RIGHT) &kp PSCRN &trans
+   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
+   &trans      &mac_undo &kp LA(LG(RIGHT)) &mac_copy &mac_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+            >;
+        };
+
+        // ============ LINUX NAV LAYER (5) ============
+        linux_nav {
+            bindings = <
+   &bootloader &lin_lang &lin_win  &lin_app  &lin_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
+   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
+   &trans      &lin_undo &kp LA(LG(RIGHT)) &lin_copy &lin_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+            >;
+        };
+
+        // ============ WINDOWS NAV LAYER (6) ============
+        windows_nav {
+            bindings = <
+   &bootloader &win_lang &win_win  &win_app  &win_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
+   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
+   &trans      &win_undo &kp LA(LG(RIGHT)) &win_copy &win_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+            >;
+        };
+
+        // ============ SHARED NUM LAYER (7) ============
+        num_layer {
+            bindings = <
+   &trans  &kp N1    &kp N2    &kp N3    &kp N4    &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &trans
+   &trans  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp F11      &kp N0   &kp N4   &kp N5   &kp N6   &sk LALT  &trans
+   &trans  &kp F1    &kp F2    &kp F3    &kp F4    &kp F5       &kp F6   &kp N1   &kp N2   &kp N3   &kp F10   &trans
+                               &trans    &trans    &trans       &trans   &trans   &trans
+            >;
+        };
+
+        // ============ SHARED FUN LAYER (8) ============
+        fun_layer {
+            bindings = <
+   &trans  &kp F1    &kp F2    &kp F3    &kp F4    &kp F5       &kp F6   &kp F7   &kp F8   &kp F9   &kp F10   &trans
+   &trans  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp F11      &kp F12  &sk LCTRL &sk LSHFT &sk LGUI &sk LALT &trans
+   &trans  &kp F1    &kp F2    &kp F3    &kp F4    &kp F5       &kp F6   &kp F7   &kp F8   &kp F9   &kp F10   &trans
+                               &trans    &trans    &trans       &trans   &trans   &trans
+            >;
+        };
+
+        // ============ MOD LAYER (9) - OS SWITCHER ============
+        mod_layer {
+            bindings = <
+   &to KEB      &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+   &to MAC_DEF  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+   &to LIN_DEF  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &to WIN_DEF
+                                &trans  &trans  &trans    &trans  &trans  &trans
+            >;
+        };
+
+        // ============ KEB LAYER (10) ============
+        keb_layer {
+            bindings = <
+   &trans      &bootloader &sys_reset &trans &trans &trans    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans
+   &to MAC_DEF &sys_reset  &trans     &trans &trans &trans    &bt BT_CLR   &trans       &trans       &trans       &trans       &trans
+   &trans      &trans      &trans     &trans &trans &trans    &trans       &trans       &trans       &trans       &trans       &trans
+                                      &trans &trans &trans    &trans       &trans       &trans
+            >;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        
+        // When on Mac and both SYM + MAC_NAV are active
+        mac_tri_layer {
+            if-layers = <SYM MAC_NAV>;
+            then-layer = <NUM>;
+        };
+        
+        // When on Linux and both SYM + LIN_NAV are active
+        lin_tri_layer {
+            if-layers = <SYM LIN_NAV>;
+            then-layer = <NUM>;
+        };
+        
+        // When on Windows and both SYM + WIN_NAV are active
+        win_tri_layer {
+            if-layers = <SYM WIN_NAV>;
+            then-layer = <NUM>;
+        };
+    };
+};
+
