@@ -209,7 +209,7 @@
    &trans  &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET &kp AMPS  &kp EQUAL &kp TILDE &kp GRAVE &trans
    &trans  &kp PLUS  &kp MINUS &kp LBKT  &kp LPAR  &kp LBRC     &kp BSLH  &sk LCTRL &sk LSHFT &sk LGUI  &sk LALT  &trans
    &trans  &kp STAR  &kp UNDER &kp RBKT  &kp RPAR  &kp RBRC     &kp FSLH  &kp PIPE  &kp LT    &kp GT    &kp QMARK &trans
-                               &trans    &mo NUM   &mo FUN      &trans    &trans    &trans
+                               &trans    &trans    &mo FUN      &trans    &trans    &trans
             >;
         };
 
@@ -220,7 +220,7 @@
    &bootloader &lin_lang &lin_win  &lin_app  &lin_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
    &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
    &trans      &lin_undo &kp LA(LG(RIGHT)) &lin_copy &lin_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
             >;
         };
 
@@ -231,7 +231,7 @@
    &bootloader &win_lang &win_win  &win_app  &win_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
    &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
    &trans      &win_undo &kp LA(LG(RIGHT)) &win_copy &win_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
             >;
         };
 
@@ -242,7 +242,7 @@
    &bootloader &mac_lang &mac_win  &mac_app  &mac_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp LG(LEFT) &kp LG(RIGHT) &kp PSCRN &trans
    &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
    &trans      &mac_undo &kp LA(LG(RIGHT)) &mac_copy &mac_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
             >;
         };
 
@@ -288,6 +288,28 @@
    &trans      &trans      &trans     &trans &trans   &trans    &trans       &trans       &trans       &trans       &trans       &trans
                                       &trans &tog KEB &trans    &trans       &trans       &trans
             >;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        // When on Linux and both SYM + LIN_NAV are active
+        lin_tri_layer {
+            if-layers = <SYM LIN_NAV>;
+            then-layer = <NUM>;
+        };
+
+        // When on Windows and both SYM + WIN_NAV are active
+        win_tri_layer {
+            if-layers = <SYM WIN_NAV>;
+            then-layer = <NUM>;
+        };
+
+        // When on Mac and both SYM + MAC_NAV are active
+        mac_tri_layer {
+            if-layers = <SYM MAC_NAV>;
+            then-layer = <NUM>;
         };
     };
 };
