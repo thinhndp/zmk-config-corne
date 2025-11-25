@@ -36,14 +36,14 @@
 
     combos {
         compatible = "zmk,combos";
-        
+
         combo_q {
             timeout-ms = <40>;
             key-positions = <2 3>;  // W + E
             bindings = <&kp Q>;
             layers = <MAC_DEF LIN_DEF WIN_DEF>;
         };
-        
+
         combo_p {
             timeout-ms = <40>;
             key-positions = <8 9>;  // I + O
@@ -281,19 +281,19 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        
+
         // When on Mac and both SYM + MAC_NAV are active
         mac_tri_layer {
             if-layers = <SYM MAC_NAV>;
             then-layer = <NUM>;
         };
-        
+
         // When on Linux and both SYM + LIN_NAV are active
         lin_tri_layer {
             if-layers = <SYM LIN_NAV>;
             then-layer = <NUM>;
         };
-        
+
         // When on Windows and both SYM + WIN_NAV are active
         win_tri_layer {
             if-layers = <SYM WIN_NAV>;
