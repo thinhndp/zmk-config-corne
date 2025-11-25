@@ -9,13 +9,13 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Layer definitions
-#define MAC_DEF 0
-#define LIN_DEF 1
-#define WIN_DEF 2
+#define LIN_DEF 0
+#define WIN_DEF 1
+#define MAC_DEF 2
 #define SYM 3
-#define MAC_NAV 4
-#define LIN_NAV 5
-#define WIN_NAV 6
+#define LIN_NAV 4
+#define WIN_NAV 5
+#define MAC_NAV 6
 #define NUM 7
 #define FUN 8
 #define MOD 9
@@ -53,43 +53,6 @@
     };
 
     macros {
-        // ============ MAC SHORTCUTS ============
-        mac_copy: mac_copy {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(C)>;
-        };
-        mac_paste: mac_paste {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(V)>;
-        };
-        mac_undo: mac_undo {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(Z)>;
-        };
-        mac_app: mac_app {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LA(SPACE)>;
-        };
-        mac_emo: mac_emo {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(LC(SPACE))>;
-        };
-        mac_win: mac_win {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(TAB)>;
-        };
-        mac_lang: mac_lang {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(LA(SPACE))>;
-        };
-
         // ============ LINUX SHORTCUTS ============
         lin_copy: lin_copy {
             compatible = "zmk,behavior-macro";
@@ -163,22 +126,49 @@
             #binding-cells = <0>;
             bindings = <&kp LC(LSHFT)>;
         };
+
+        // ============ MAC SHORTCUTS ============
+        mac_copy: mac_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(C)>;
+        };
+        mac_paste: mac_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(V)>;
+        };
+        mac_undo: mac_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(Z)>;
+        };
+        mac_app: mac_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(SPACE)>;
+        };
+        mac_emo: mac_emo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(LC(SPACE))>;
+        };
+        mac_win: mac_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(TAB)>;
+        };
+        mac_lang: mac_lang {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LA(SPACE))>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // ============ MAC BASE LAYER (0) ============
-        mac_default {
-            bindings = <
-   &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
-   &mt_esc LCTRL ESC &kp A  &kp S  &kp D     &kp F      &kp G        &kp H    &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
-   &kp LCTRL       &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N    &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
-                                 &kp LGUI  &mo MAC_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
-            >;
-        };
-
-        // ============ LINUX BASE LAYER (1) ============
+        // ============ LINUX BASE LAYER (0) ============
         linux_default {
             bindings = <
    &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
@@ -188,7 +178,7 @@
             >;
         };
 
-        // ============ WINDOWS BASE LAYER (2) ============
+        // ============ WINDOWS BASE LAYER (1) ============
         windows_default {
             bindings = <
    &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
@@ -197,6 +187,17 @@
                                  &kp LGUI  &mo WIN_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
             >;
         };
+
+        // ============ MAC BASE LAYER (2) ============
+        mac_default {
+            bindings = <
+   &kp TAB         &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y    &kp U      &kp I      &kp O    &kp P     &kp BSPC
+   &mt_esc LCTRL ESC &kp A  &kp S  &kp D     &kp F      &kp G        &kp H    &kp J      &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL       &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N    &kp M      &kp COMMA  &kp DOT  &kp FSLH  &kp RET
+                                 &kp LGUI  &mo MAC_NAV &kp LSHFT    &kp SPC  &mo SYM    &kp LALT
+            >;
+        };
+
 
         // ============ SHARED SYM LAYER (3) ============
         sym_layer {
@@ -208,17 +209,7 @@
             >;
         };
 
-        // ============ MAC NAV LAYER (4) ============
-        mac_nav {
-            bindings = <
-   &bootloader &mac_lang &mac_win  &mac_app  &mac_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp LG(LEFT) &kp LG(RIGHT) &kp PSCRN &trans
-   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
-   &trans      &mac_undo &kp LA(LG(RIGHT)) &mac_copy &mac_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
-            >;
-        };
-
-        // ============ LINUX NAV LAYER (5) ============
+        // ============ LINUX NAV LAYER (4) ============
         linux_nav {
             bindings = <
    &bootloader &lin_lang &lin_win  &lin_app  &lin_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
@@ -228,12 +219,22 @@
             >;
         };
 
-        // ============ WINDOWS NAV LAYER (6) ============
+        // ============ WINDOWS NAV LAYER (5) ============
         windows_nav {
             bindings = <
    &bootloader &win_lang &win_win  &win_app  &win_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
    &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
    &trans      &win_undo &kp LA(LG(RIGHT)) &win_copy &win_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
+                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+            >;
+        };
+
+        // ============ MAC NAV LAYER (6) ============
+        mac_nav {
+            bindings = <
+   &bootloader &mac_lang &mac_win  &mac_app  &mac_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp LG(LEFT) &kp LG(RIGHT) &kp PSCRN &trans
+   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
+   &trans      &mac_undo &kp LA(LG(RIGHT)) &mac_copy &mac_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
                                    &mo MOD   &trans    &trans          &trans    &trans    &trans
             >;
         };
@@ -282,12 +283,6 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        // When on Mac and both SYM + MAC_NAV are active
-        mac_tri_layer {
-            if-layers = <SYM MAC_NAV>;
-            then-layer = <NUM>;
-        };
-
         // When on Linux and both SYM + LIN_NAV are active
         lin_tri_layer {
             if-layers = <SYM LIN_NAV>;
@@ -297,6 +292,12 @@
         // When on Windows and both SYM + WIN_NAV are active
         win_tri_layer {
             if-layers = <SYM WIN_NAV>;
+            then-layer = <NUM>;
+        };
+
+        // When on Mac and both SYM + MAC_NAV are active
+        mac_tri_layer {
+            if-layers = <SYM MAC_NAV>;
             then-layer = <NUM>;
         };
     };
