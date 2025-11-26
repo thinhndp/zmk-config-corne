@@ -7,6 +7,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/pointing.h>
 
 // Layer definitions
 #define LIN_DEF 0
@@ -20,6 +21,7 @@
 #define FUN 8
 #define MOD 9
 #define KEB 10
+#define MOUSE 11
 
 / {
     behaviors {
@@ -209,7 +211,7 @@
    &trans  &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET &kp AMPS  &kp EQUAL &kp TILDE &kp GRAVE &trans
    &trans  &kp PLUS  &kp MINUS &kp LBKT  &kp LPAR  &kp LBRC     &kp BSLH  &sk LCTRL &sk LSHFT &sk LGUI  &sk LALT  &trans
    &trans  &kp STAR  &kp UNDER &kp RBKT  &kp RPAR  &kp RBRC     &kp FSLH  &kp PIPE  &kp LT    &kp GT    &kp QMARK &trans
-                               &trans    &trans    &mo FUN      &trans    &trans    &trans
+                               &trans    &mo NUM   &mo FUN      &trans    &trans    &trans
             >;
         };
 
@@ -218,9 +220,9 @@
             display-name = "LIN_NAV";
             bindings = <
    &bootloader &lin_lang &lin_win  &lin_app  &lin_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
-   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
+   &tog MOUSE  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
    &trans      &lin_undo &kp LA(LG(RIGHT)) &lin_copy &lin_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
             >;
         };
 
@@ -229,9 +231,9 @@
             display-name = "WIN_NAV";
             bindings = <
    &bootloader &win_lang &win_win  &win_app  &win_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp HOME &kp END &kp PSCRN &trans
-   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
+   &tog MOUSE  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &kp BSPC  &trans
    &trans      &win_undo &kp LA(LG(RIGHT)) &win_copy &win_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
             >;
         };
 
@@ -240,15 +242,15 @@
             display-name = "MAC_NAV";
             bindings = <
    &bootloader &mac_lang &mac_win  &mac_app  &mac_emo  &kp C_VOL_UP    &kp CAPS  &kp DEL   &kp LG(LEFT) &kp LG(RIGHT) &kp PSCRN &trans
-   &trans      &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
+   &tog MOUSE  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp C_VOL_DN    &kp LEFT  &kp DOWN  &kp UP       &kp RIGHT     &kp BSPC  &trans
    &trans      &mac_undo &kp LA(LG(RIGHT)) &mac_copy &mac_paste &kp C_PP &kp RET &kp BSPC &kp TAB &kp PG_DN &kp PG_UP &trans
-                                   &mo MOD   &trans    &trans          &trans    &trans    &trans
+                                   &mo MOD   &trans    &trans          &trans    &mo SYM   &trans
             >;
         };
 
         // ============ SHARED NUM LAYER (7) ============
         num_layer {
-            display-name = "NUM";
+            display-name = "WIN_DEF";
             bindings = <
    &trans  &kp N1    &kp N2    &kp N3    &kp N4    &kp N5       &kp N6   &kp N7   &kp N8   &kp N9   &kp N0    &trans
    &trans  &sk LALT  &sk LGUI  &sk LSHFT &sk LCTRL &kp F11      &kp N0   &kp N4   &kp N5   &kp N6   &sk LALT  &trans
@@ -289,27 +291,15 @@
                                       &trans &tog KEB &trans    &trans       &trans       &trans
             >;
         };
-    };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-
-        // When on Linux and both SYM + LIN_NAV are active
-        lin_tri_layer {
-            if-layers = <SYM LIN_NAV>;
-            then-layer = <NUM>;
-        };
-
-        // When on Windows and both SYM + WIN_NAV are active
-        win_tri_layer {
-            if-layers = <SYM WIN_NAV>;
-            then-layer = <NUM>;
-        };
-
-        // When on Mac and both SYM + MAC_NAV are active
-        mac_tri_layer {
-            if-layers = <SYM MAC_NAV>;
-            then-layer = <NUM>;
+        mouse_layer {
+            display-name = "MOUSE"
+            bindings = <
+    &trans  &trans  &trans          &msc SCRL_UP    &trans           &trans          &trans          &mkp MB4        &mmv MOVE_UP    &mkp MB5         &trans  &trans
+    &trans  &trans  &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_RIGHT  &trans          &trans          &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
+    &trans  &trans  &trans          &trans          &trans           &trans          &trans          &mkp MB1        &mkp MB3        &mkp MB2         &trans  &trans
+                                    &trans          &tog MOUSE       &trans          &trans          &trans          &trans
+            >;
         };
     };
 };
