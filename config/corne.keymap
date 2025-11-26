@@ -22,6 +22,7 @@
 #define MOD 9
 #define KEB 10
 #define MOUSE 11
+#define MS_FST 12
 
 / {
     behaviors {
@@ -295,8 +296,18 @@
         mouse_layer {
             display-name = "MOUSE";
             bindings = <
-    &trans      &trans  &mkp MB4        &msc MOVE_UP    &mkp MB5         &trans          &mmv SCRL_LEFT  &mmv SCRL_DOWN  &mmv SCRL_UP    &mmv SCRL_RIGHT  &trans   &trans
-    &tog MOUSE  &trans  &msc MOVE_LEFT  &msc MOVE_DOWN  &msc MOVE_RIGHT  &trans          &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &trans   &trans
+    &trans      &trans  &mkp MB4        &mmv MOVE_UP    &mkp MB5         &trans          &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  &trans   &trans
+    &tog MOUSE  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans          &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &trans   &trans
+    &trans      &trans  &mkp MB2        &mkp MB3        &mkp MB1         &trans          &mkp MB4        &mkp MB1        &mkp MB3        &mkp MB2         &mkp MB5 &trans
+                                        &mkp MB3        &mkp MB2         &mkp MB1        &mkp MB1        &mo MS_FST      &mkp MB3
+            >;
+        };
+
+        mouse_fast_layer {
+            display-name = "MOUSE (F)";
+            bindings = <
+    &trans      &trans  &mkp MB4        &mmv MOVE_UP    &mkp MB5         &trans          &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  &trans   &trans
+    &tog MOUSE  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans          &mmv MOVE_X(-1500)  &mmv MOVE_Y(1500)  &mmv MOVE_Y(-1500)    &mmv MOVE_X(1500)  &trans   &trans
     &trans      &trans  &mkp MB2        &mkp MB3        &mkp MB1         &trans          &mkp MB4        &mkp MB1        &mkp MB3        &mkp MB2         &mkp MB5 &trans
                                         &mkp MB3        &mkp MB2         &mkp MB1        &mkp MB1        &mkp MB2        &mkp MB3
             >;
