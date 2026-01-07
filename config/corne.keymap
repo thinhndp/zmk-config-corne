@@ -23,6 +23,8 @@
 #define KEB 10
 #define MOUSE 11
 #define MS_FST 12
+#define GAME 13
+#define G_NAV 14
 
 / {
     behaviors {
@@ -276,7 +278,7 @@
             display-name = "MOD";
             bindings = <
    &to MAC_DEF  &tog KEB &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-   &to WIN_DEF  &trans   &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+   &to WIN_DEF  &to GAME &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
    &to LIN_DEF  &trans   &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
                                 &trans  &trans  &trans    &trans  &trans  &trans
             >;
@@ -310,6 +312,28 @@
     &tog MOUSE  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans          &mmv MOVE_X(-1500)  &mmv MOVE_Y(1500)  &mmv MOVE_Y(-1500)    &mmv MOVE_X(1500)  &trans   &trans
     &trans      &trans  &mkp MB2        &mkp MB3        &mkp MB1         &trans          &mkp MB4        &mkp MB1        &mkp MB3        &mkp MB2         &mkp MB5 &trans
                                         &mkp MB3        &mkp MB2         &mkp MB1        &mkp MB1        &mkp MB2        &mkp MB3
+            >;
+        };
+
+        // ============ GAME BASE LAYER (13) ============
+        game_layer {
+            display-name = "GAME";
+            bindings = <
+   &kp ESC    &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y  &kp U  &kp I      &kp O    &kp P     &kp BSPC
+   &kp LCTRL  &kp A  &kp S  &kp D     &kp F      &kp G        &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LSHFT  &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &to WIN_DEF
+                            &kp LALT  &mo G_NAV  &kp SPC      &kp RET  &sl G_NAV  &kp BSLH
+            >;
+        };
+
+        // ============ GAME SKILL LAYER (14) ============
+        game_nav_layer {
+            display-name = "GAME_NAV";
+            bindings = <
+   &kp TILDE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5      &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &trans
+   &trans     &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans   &kp TAB
+   &trans     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5      &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
+                              &trans  &trans  &trans      &trans  &trans  &trans
             >;
         };
     };
