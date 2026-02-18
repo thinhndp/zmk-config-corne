@@ -320,9 +320,9 @@
             display-name = "GAME";
             bindings = <
    &kp ESC    &kp Q  &kp W  &kp E     &kp R      &kp T        &kp Y  &kp U  &kp I      &kp O    &kp P     &kp BSPC
-   &kp LCTRL  &kp A  &kp S  &kp D     &kp F      &kp G        &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp SQT
+   &kp LCTRL  &kp A  &kp S  &kp D     &kp F      &kp G        &kp H  &kp J  &kp K      &kp L    &kp SEMI  &kp RET
    &kp LSHFT  &kp Z  &kp X  &kp C     &kp V      &kp B        &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &to WIN_DEF
-                            &kp LALT  &mo G_NAV  &kp SPC      &kp RET  &sl G_NAV  &kp BSLH
+                            &kp LALT  &mo G_NAV  &kp SPC      &kp SPC  &sl G_NAV  &kp BSLH
             >;
         };
 
@@ -331,8 +331,8 @@
             display-name = "GAME_NAV";
             bindings = <
    &kp TILDE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5      &kp N6  &kp N7  &kp N8  &kp N9  &kp N0   &trans
-   &trans     &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans   &kp TAB
-   &trans     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5      &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
+   &kp SQT    &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans   &kp TAB
+   &kp TAB     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5      &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &trans
                               &trans  &trans  &trans      &trans  &trans  &trans
             >;
         };
